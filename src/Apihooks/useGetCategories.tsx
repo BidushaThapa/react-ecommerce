@@ -1,6 +1,6 @@
 //useGetCategories
 import axios from "axios";
-import { ApiModel, URL } from "./constant";
+import {  URL } from "./constant";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchCategory = (category:string) => {
@@ -10,13 +10,15 @@ const fetchCategory = (category:string) => {
 };
 
 
-export const useGetCategories = (category:string) => {
+export const useGetCategories = (category?: string) => {
   return useQuery({
-    queryKey: ["products-by-category" ,category],
-    queryFn:()=> fetchCategory(category),
+    queryKey: ["products-by-category", category],
+    queryFn: () => fetchCategory(category!),
     select: (res) => res.data.products,
-    enabled: !!category,
+    enabled: !!category, // only run if category exists
   });
+};
+
  
-}
+
 

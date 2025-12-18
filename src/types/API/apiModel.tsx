@@ -1,6 +1,7 @@
 export interface ApiModel {
     limit:number,
     page:number,
+    id:string,
   category :string[],
   rating:string,
   title:string,

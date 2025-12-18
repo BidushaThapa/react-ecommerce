@@ -1,9 +1,8 @@
 //constant.js
 
-import { ApiModel } from "../types/API/apiModel";
 import { ProductQuery } from "./useGetProduct";
 
-export const BASEURL = 'https://dummyjsProductQueryon.com';
+export const BASEURL = "https://dummyjson.com";
 
 export const URL = {
   getProducts: (updatedPage: ProductQuery)  => {

@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-// import {logo} from "../assets/react.svg";
+ import logo from "../assets/react.svg";
+
 import { FaShoppingCart } from "react-icons/fa";
 import { UserStore } from "../store/UserStore";
 import { useAuth } from "../Apihooks/useAuth";
@@ -10,14 +11,15 @@ export const Header = () => {
   const loginButton = () => navigate("login");
 
   return (
-    <div className="flex justify-between items-center p-4 bg-amber-black border-1 rounded-xl mb-3">
+      <div className="flex   flex-col gap-6 p-4 border rounded-xl md:flex-row md:justify-between md:items-center">
+
       <div>
-        <Link to="/">
-          <img alt="logo" className="h-10 w-auto" />
+        <Link to="/products">
+          <img alt="logo" src={logo} className="h-10 w-auto" />
         </Link>
       </div>
 
-      <div className="flex justify-center gap-8 text-white font-medium text-medium">
+      <div className=" hidden md:flex justify-center gap-8 text-white font-medium text-medium">
         <Link className="hover:text-amber-400 hover:underline" to="/">
           Home
         </Link>
@@ -52,7 +54,7 @@ export const Header = () => {
         ) : (
           <button
             onClick={loginButton}
-            className="border-2 border-white rounded-xl px-4 py-1 hover:bg-amber-500"
+            className="border-2 text-white border-white rounded-xl px-4 py-1 hover:bg-amber-500"
           >
             Login
           </button>

@@ -1,14 +1,7 @@
 import { create } from "zustand";
 import { ProductModel } from "../types/Products/productModel";
-interface filters {
-    category: string,
-    color: string,
-    size: string,
-    rating: number,
-    title:string,
-    description:string,
+import { Filters } from "../types/Products/productModel";
 
-}
 
 interface ProductStoreModel {
   loading :boolean,
@@ -17,7 +10,7 @@ interface ProductStoreModel {
   productList :ProductModel[],
   setProductList:(products:ProductModel[])=>void,
 
-  filters:filters;
+  filters:Filters;
   setFilters:(key:string,value:string)=>void,
 
   buyNowProduct:ProductModel|null,

@@ -13,8 +13,27 @@ export interface ProductModel {
   color: string;
   size: string;
   images: string[];
+  shippingInformation:string;
+  returnPolicy:string;
+  availabilityStatus:string;
+  warrantyInformation:string;
+  reviews:Review[]
 }
+export interface Filters {
+    category: string;
+    color: string;
+    size: string;
+    rating: number;
+    title:string;
+    description:string;
 
+}
+export interface Review {
+  reviewerName: string;
+  date: string;
+  rating: number;
+  comment: string;
+}
 // export interface SearchModel {
 //     event : string[]
 // }

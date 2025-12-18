@@ -1,9 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { About } from "../pages/about";
 import { Contact } from "../pages/Contact";
 import { Services } from "../pages/Services";
 import RootLayout from "../Layout/RootLayout";
-import { Details } from "../pages/Details";
+import { Details } from "../pages/ProductDetails";
 import { ProductListing } from "../pages/ProductListing";
 import { MyCart } from "../pages/MyCart";
 import { BuyNow } from "../pages/BuyNow";
@@ -13,74 +12,41 @@ import TestPage from "../pages/TestPage";
 import { Homework } from "../pages/Homework";
 import { Login } from "../pages/Login";
 import { AuthLayout } from "../Layouts/AuthLayout";
+import CategoryProducts from "../pages/CategoryProducts";
+import ShopLayout from "@/components/ShopLayout";
+import { About } from "@/pages/About";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
+      { index: true, element: <Home /> },
+
       {
         path: "products",
-        element: <ProductListing />,
-      },
-
-      {
-        path: "/products/:id",
-        element: <Details />,
-      },
-
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "/services",
-        element: <Services />,
-      },
-     
-      {
-        path: "/test",
-        element: <TestPage />,
-      },
-      {
-        path: "/buynow",
-        element: <BuyNow />,
-      },
-      {
-        path: "/myblog",
-        element: <Blog />,
-      },
-      {
-        path: "/homework",
-        element: <Homework />,
-      },
-      {
-        path: "/about",
-        element: <About />,
+        element: <ShopLayout />,
         children: [
-          {
-            path: ":id",
-            element: <Details />,
-          },
+          { index: true, element: <ProductListing /> },
+          { path: "category/:cat", element: <CategoryProducts /> },
+         
         ],
       },
+       { path: "products/:id", element: <Details /> },
+
+      { path: "contact", element: <Contact /> },
+      { path: "login", element: <Login /> },
+      { path: "services", element: <Services /> },
+      { path: "test", element: <TestPage /> },
+      { path: "buynow", element: <BuyNow /> },
+      { path: "myblog", element: <Blog /> },
+      { path: "homework", element: <Homework /> },
+      { path: "about", element: <About /> },
     ],
   },
   {
     path: "/",
     element: <AuthLayout />,
-    children: [
-       {
-        path: "/mycart",
-        element: <MyCart />,
-      }
-    ],
+    children: [{ path: "mycart", element: <MyCart /> }],
   },
 ]);
+

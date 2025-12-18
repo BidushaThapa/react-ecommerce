@@ -1,14 +1,12 @@
 //productlisting
 import { useProduct } from "../store/productStore";
 import { Products } from "../Products";
-import { Sidebar } from "../components/Sidebar";
 import { useGetProduct } from "../Apihooks/useGetProduct";
 import { useState } from "react";
-import { ApiModel, Product } from "../types/API/apiModel";
+import {  Product } from "../types/API/apiModel";
 
 
 export const ProductListing = () => {
-  // const productList = useProduct((state) => state.productList);
   const [page,setPage]=useState(1)
   const {data , isLoading}=   useGetProduct(page);
   const filters = useProduct((state) => state.filters);
@@ -28,11 +26,9 @@ const pageNumbers=[1,2,3,4,5]
   )
   return (
     <div className="grid grid-cols-5 h-[92%]">
-      <div className="hidden md:block p-4 col-span-1 bg-white">
-        <Sidebar />
-      </div>
-      <div className="col-span-4">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 grid-cols-1 p-5 mt-0">
+     
+      <div className="col-span-5 ">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 grid-cols-2 p-5 mt-0">
           {filteredProducts?.map((product:Product) => (
             <Products key={product.id} data={product} />
           ))}

@@ -1,16 +1,16 @@
 //useGetProductDetails
-import axios from "axios";
+import api from "./ApiInstance"
 import { URL } from "./constant.ts";
 import { useQuery } from "@tanstack/react-query";
+import { ProductModel } from "../types/Products/productModel.ts";
  
-const fetchProductDetails = (id:string) => {
-  return axios.get(URL.getProductDetails(id));
+const fetchProductDetails = (id:string):Promise<ProductModel> => {
+  return api.get(URL.getProductDetails(id));
 };
 
 export const useGetProductDeatils = (id:string) => {
-  return useQuery({
+  return useQuery<ProductModel,Error>({ 
     queryKey:["productDetails",id],
     queryFn:()=>fetchProductDetails(id),
-    select:(data)=>data.data
   });
 };

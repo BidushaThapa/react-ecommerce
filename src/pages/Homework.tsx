@@ -47,7 +47,7 @@ setRotateImg((prev)=>(prev+1) % Image.length)
  
   };
   //  call back function
-    const colorChange =(color)=>{
+    const colorChange =(color:string)=>{
 setBgColor(color);
     }
   return (
