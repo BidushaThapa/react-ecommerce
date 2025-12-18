@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Slider1 from "../assets/slider1.webp";
-import Slider2 from "../assets/slider2.webp";
-import Slider3 from "../assets/slider3.webp";
-import Slider4 from "../assets/slider4.webp";
+import Slider1 from "../assets/Slider1.webp";
+import Slider2 from "../assets/Slider2.webp";
+import Slider3 from "../assets/Slider3.webp";
+import Slider4 from "../assets/Slider4.webp";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const details = [
