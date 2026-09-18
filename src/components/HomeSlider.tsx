@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import Slider1 from "../assets/slider1.webp";
-import Slider2 from "../assets/slider2.webp";
-import Slider3 from "../assets/slider3.webp";
-import Slider4 from "../assets/slider4.webp";
+import Slider1 from "../assets/Slider1.webp";
+import Slider2 from "../assets/Slider2.webp";
+import Slider3 from "../assets/Slider3.webp";
+import Slider4 from "../assets/Slider4.webp";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const details = [
@@ -14,34 +14,35 @@ const details = [
 
 export const HomeSlider = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const scroll = useRef(null)
+  const scroll = useRef<HTMLDivElement>(null)
   const imageSrc = details[imageIndex].image;
   const content = details[imageIndex].content;
 
   const rightButton = ()=>{
-    scroll.current.scrollBy({left: 400})
+    scroll.current?.scrollBy({left: 400})
   }
     const leftButton=()=>{
-    scroll.current.scrollBy({left: -400})
+    scroll.current?.scrollBy({left: -400})
   }
-  // const prevImage = () => {
-  //   const index = imageIndex === 0 ? details.length - 1 : imageIndex - 1;
-  //   setImageIndex(index);
-  // };
+  const prevImage = () => {
+    const index = imageIndex === 0 ? details.length - 1 : imageIndex - 1;
+    setImageIndex(index);
+  };
 
-  // const nextImage = () => {
-  //   const index = imageIndex === details.length - 1 ? 0 : imageIndex + 1;
-  //   setImageIndex(index);
-  // };
+  const nextImage = () => {
+    const index = imageIndex === details.length - 1 ? 0 : imageIndex + 1;
+    setImageIndex(index);
+  };
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setImageIndex((prev) => {
-  //       const index = prev === details.length - 1 ? 0 : prev + 1;
-  //       return index;
-  //     });
-  //   }, 4000);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndex((prev) => {
+        const index = prev === details.length - 1 ? 0 : prev + 1;
+        return index;
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative">

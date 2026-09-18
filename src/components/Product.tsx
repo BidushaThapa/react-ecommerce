@@ -17,7 +17,7 @@ export const Product = ({ data }: Props) => {
 
   const addToCart = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-d
+
     const cartItems = localStorage.getItem("cart");
     const cartData = cartItems ? JSON.parse(cartItems) : [];
     const index = cartData.findIndex((item: any) => item.id === data.id);

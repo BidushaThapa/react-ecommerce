@@ -5,15 +5,15 @@ import {
   FaShoppingCart,
 } from "react-icons/fa"; 
 import { CartCard } from "../components/cart/CartCard";
-import { CartModel } from "../types/Cart/cartModel"; 
+import { CartProduct } from "../types/Cart/cartModel";
 
 export const MyCart = () => {
   const cartItems = localStorage.getItem("cart");
-    const token = localStorage.getItem("sessionId")
+  const token = localStorage.getItem("sessionId");
 
-  const cartList = cartItems ? JSON.parse(cartItems) : [];
-    
-    const cartListForUser:CartModel[] = cartList[token]||[]
+  const cartList: Record<string, CartProduct[]> = cartItems ? JSON.parse(cartItems) : {};
+
+  const cartListForUser: CartProduct[] = token ? cartList[token] || [] : [];
 
 
   return (
@@ -51,7 +51,7 @@ export const MyCart = () => {
               </p>
             </div>
           ) : (
-            cartListForUser.map((product:CartModel) => (
+            cartListForUser.map((product:CartProduct) => (
               <CartCard key={product.id} product={product} />
             ))
           )}

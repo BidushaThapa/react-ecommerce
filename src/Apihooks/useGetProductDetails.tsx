@@ -1,8 +1,8 @@
 //useGetProductDetails
 import api from "./ApiInstance"
-import { URL } from "./constant.ts";
+import { URL } from "./constant";
 import { useQuery } from "@tanstack/react-query";
-import { ProductModel } from "../types/Products/productModel.ts";
+import { ProductModel } from "../types/Products/productModel";
  
 const fetchProductDetails = (id:string):Promise<ProductModel> => {
   return api.get(URL.getProductDetails(id));

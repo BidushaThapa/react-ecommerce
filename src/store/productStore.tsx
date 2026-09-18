@@ -11,7 +11,7 @@ interface ProductStoreModel {
   setProductList:(products:ProductModel[])=>void,
 
   filters:Filters;
-  setFilters:(key:string,value:string)=>void,
+  setFilters:(key:string,value:string|number)=>void,
 
   buyNowProduct:ProductModel|null,
   setBuyNowProduct:(product:ProductModel)=>void,

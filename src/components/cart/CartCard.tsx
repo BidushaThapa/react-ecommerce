@@ -2,9 +2,9 @@
 
 import React from "react";
 import { FaTrashCan } from "react-icons/fa6";
-import { CartModel } from "../../types/Cart/cartModel";
+import { CartProduct } from "../../types/Cart/cartModel";
 
-export const CartCard = ({ product }:{product:CartModel}) => {
+export const CartCard = ({ product }:{product:CartProduct}) => {
   const [quantity, setQuantity] = React.useState(product.quantity || 1);
   const total = product.price * (quantity || 1);
 
@@ -25,7 +25,7 @@ export const CartCard = ({ product }:{product:CartModel}) => {
       return;
     }
 
-    const cartData: Record<string, CartModel[]> = cartItems ? JSON.parse(cartItems) : {};
+    const cartData: Record<string, CartProduct[]> = cartItems ? JSON.parse(cartItems) : {};
     const userCart = cartData[token] || [];
 
     const updatedCart = userCart.filter((item) => item.id !== product.id);

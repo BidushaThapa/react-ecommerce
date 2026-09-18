@@ -1,4 +1,4 @@
-import { HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 //for props
 interface Headingprops extends HTMLAttributes <HTMLParagraphElement>{ //interface bata yesari garna sakinxa 
   children:ReactNode //ReactNode covers anything renderable (text, JSX, components, etc.)
@@ -35,7 +35,7 @@ export const InputText = ({className,...rest}:InputTextProps) => {
   </div>
   );
 }
-interface Buttonprops extends HTMLAttributes <HTMLButtonElement>{
+interface Buttonprops extends ButtonHTMLAttributes <HTMLButtonElement>{
   children:ReactNode
 }
 export const Button = ({ children, ...rest }:Buttonprops) => {

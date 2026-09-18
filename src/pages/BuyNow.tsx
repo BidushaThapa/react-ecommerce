@@ -1,7 +1,6 @@
 //BuyNow
 import { FaArrowRight, FaMinus, FaPlus, FaShoppingBag } from 'react-icons/fa';
 import { useProduct } from '../store/productStore';
-import { CartModel } from '../types/Cart/cartModel';
 
 export const BuyNow = () => {
   const buyNowProduct= useProduct((state) => state.buyNowProduct);
