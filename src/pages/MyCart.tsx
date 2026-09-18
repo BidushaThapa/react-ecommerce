@@ -3,7 +3,7 @@ import {
   FaArrowRight,
   FaShoppingBag,
   FaShoppingCart,
-} from "react-icons/fa";
+} from "react-icons/fa"; 
 import { CartCard } from "../components/cart/CartCard";
 import { CartModel } from "../types/Cart/cartModel"; 
 
@@ -17,10 +17,10 @@ export const MyCart = () => {
 
 
   return (
-    <div className="flex flex-col gap-10 min-h-screen bg-white text-black p-6">
+    <div className="flex flex-col gap-5 md:gap-10 min-h-screen bg-white text-black p-2 md:p-6">
       {/* Title */}
-      <div className="flex justify-between items-center">
-        <h1 className="flex gap-2 text-3xl font-extrabold text-gray-900 border-b-4 border-amber-500 p-2">
+      <div className="flex  justify-between items-center">
+        <h1 className="flex gap-2 text-xl md:text-3xl font-extrabold text-gray-900 border-b-4 border-amber-500 p-2">
           <FaShoppingBag /> My Cart
         </h1>
         <p>
@@ -28,10 +28,10 @@ export const MyCart = () => {
         </p>
       </div>
 
-    <div className="grid grid-cols-4">
+    <div className="flex flex-col lg:grid lg:grid-cols-4">
         {/* Body left  */}
-           <div className=" col-span-3 p-10 shadow-lg rounded-4xl ">
-        <div className="grid text-xl grid-cols-6 gap-6 pb-4 mb-4 font-semibold ">
+           <div className=" col-span-3 p-2 md:p-10 shadow-lg rounded-4xl ">
+        <div className="  hidden md:grid  text-xl grid-cols-6 gap-6 pb-4 mb-4 font-semibold ">
           <p className="col-span-3 ">Product</p>
           <p>Price</p>
           <p>Quantity</p>

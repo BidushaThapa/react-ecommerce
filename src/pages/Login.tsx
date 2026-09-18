@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import { UserStore } from "../store/UserStore";
 import { LoginModel } from "../types/loginModel";
-import { useLoginStore } from "../store/LoginStore";
+// import { useLoginStore } from "../store/LoginStore";
 
 export const Login = () => {
-    const isLogin = useLoginStore((state) => state.isLogin);
+  // const isLogin = useLoginStore((state) => state.isLogin);
   const setSessionId = UserStore((state) => state.setSessionId);
   const navigate = useNavigate();
 
@@ -16,39 +16,29 @@ export const Login = () => {
     if (user) {
       setSessionId(user.token);
       alert(`Hi ${user.name} !!`);
-      navigate("/");
+     
     }
+    if (user?.email==="admin@gmail.com"){
+      navigate("/admin")
+    }
+    else
+       {
+        navigate("/");
+      }
   };
 
   return (
-        <div className="relative shadow-[0_0_40px_10px_rgba(217,119,6,0.4)]  max-w-5xl mx-auto mt-[8rem]  min-h-[550px] max-h-[550px] h-full border-2 border-amber-600 bg-amber-700 rounded-md p-8 overflow-hidden transition-all duration-700 ease-in-out">
-    <div
-      className={`relative shadow-[0_0_40px_10px_rgba(217,119,6,0.4)]  max-w-5xl mx-auto mt-[8rem]  min-h-[550px] max-h-[550px] h-full border-2 border-amber-600 bg-linear-to-br ${
-        !isLogin ? "from-amber-700 to-black" : "from-black to-amber-700"
-      } rounded-md p-8 overflow-hidden transition-all duration-700 ease-in-out`}
-    >
-      <div
-        className={`absolute transition-all duration-700 ease-in-out top-0  w-[200%] h-[200%] bg-black   
-          ${
-            isLogin
-              ? "-left-[920px]  rotate-[50deg]"
-              : "-right-[920px] rotate-[-50deg]"
-          }
-        `}
-      ></div>
+       <div className="relative mx-10 my-15 overflow-hidden ">
+        <div className=" rotate-[30deg] skew-y-[5deg] origin-top-right mx-15 relative my-5 h-[80vh]  bg-[linear-gradient(50deg,#60a5fa,#172554)]  from-blue-400 to-blue-950 
+transition-all duration-700 ease-in-out  p-4  overflow-hidden right-[-40px] ">
+      </div>
 
         {/* Login form */}
-           <div
-        className={`absolute w-full h-full transition-all duration-700 ease-in-out
-      ${
-        isLogin
-          ? "opacity-100 translate-x-0"
-          : "opacity-0 translate-x-[50px] pointer-events-none"
-      }
-    `}
-      >
-          <div className="flex p-8 m-2 justify-center items-center flex-col gap-4 mt-4 relative z-10">
-            <Heading >Login</Heading>
+        <div className="h-[80vh] p-4    absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 grid gap-10 grid-cols-2  overflow-hidden
+">
+
+          <div  className="flex  flex-col p-4 justify-center items-center">
+            <Heading>Login</Heading>
 
             <Formik
               validationSchema={userSchema}
@@ -83,21 +73,19 @@ export const Login = () => {
                       component="div"
                       className="text-red-500 text-sm"
                     />
-                   
-
                   </div>
 
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="items-center flex justify-center"
+                    className="items-center  flex justify-center"
                   >
                     Login
                   </Button>
 
-                  <div className="text-black flex flex-col items-center">
+                  <div className="text-white flex flex-col items-center">
                     <p>Don't have an account?</p>
-                    <button className="underline p-1 text-slate-500">
+                    <button className="underline p-1 text-slate-500 cursor-pointer">
                       Sign Up
                     </button>
                   </div>
@@ -107,7 +95,7 @@ export const Login = () => {
           </div>
 
           {/* Right side welcome section */}
-          <div className="text-black p-6 w-full bg-slate-100 flex flex-col gap-3 justify-center items-end text-right absolute bottom-0 right-0">
+          <div className="flex flex-col rounded-4xl text-white  justify-center items-center  p-4">
             <h1 className="font-semibold text-xl">
               WELCOME <br /> BACK!
             </h1>
@@ -119,7 +107,5 @@ export const Login = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
- 

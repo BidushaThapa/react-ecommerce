@@ -7,7 +7,7 @@ interface Headingprops extends HTMLAttributes <HTMLParagraphElement>{ //interfac
 
 export const Heading =({children,...rest}:Headingprops)=>{
     return (
-    <p className="font-bold text-black text-3xl"{...rest}>
+    <p className="font-bold text-white text-3xl"{...rest}>
         {children}
         </p>
     );

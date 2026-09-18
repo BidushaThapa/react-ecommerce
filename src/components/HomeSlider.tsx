@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Slider1 from "../assets/slider1.webp";
 import Slider2 from "../assets/slider2.webp";
 import Slider3 from "../assets/slider3.webp";
@@ -14,32 +14,38 @@ const details = [
 
 export const HomeSlider = () => {
   const [imageIndex, setImageIndex] = useState(0);
-
+  const scroll = useRef(null)
   const imageSrc = details[imageIndex].image;
   const content = details[imageIndex].content;
 
-  const prevImage = () => {
-    const index = imageIndex === 0 ? details.length - 1 : imageIndex - 1;
-    setImageIndex(index);
-  };
+  const rightButton = ()=>{
+    scroll.current.scrollBy({left: 400})
+  }
+    const leftButton=()=>{
+    scroll.current.scrollBy({left: -400})
+  }
+  // const prevImage = () => {
+  //   const index = imageIndex === 0 ? details.length - 1 : imageIndex - 1;
+  //   setImageIndex(index);
+  // };
 
-  const nextImage = () => {
-    const index = imageIndex === details.length - 1 ? 0 : imageIndex + 1;
-    setImageIndex(index);
-  };
+  // const nextImage = () => {
+  //   const index = imageIndex === details.length - 1 ? 0 : imageIndex + 1;
+  //   setImageIndex(index);
+  // };
 
-  useEffect(() => {
-    setInterval(() => {
-      setImageIndex((prev) => {
-        const index = prev === details.length - 1 ? 0 : prev + 1;
-        return index;
-      });
-    }, 4000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setImageIndex((prev) => {
+  //       const index = prev === details.length - 1 ? 0 : prev + 1;
+  //       return index;
+  //     });
+  //   }, 4000);
+  // }, []);
 
   return (
     <div className="relative">
-      <div className="w-full min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[600px] overflow-hidden">
+      <div ref={scroll} className=" w-full max-h-[calc(100vh-100px)] overflow-hidden">
         <img src={imageSrc} className=' object-cover' />
         
         <div className="absolute top-2/5 right-6   md:right-24 lg:right-48 hidden md:block">
@@ -54,21 +60,20 @@ export const HomeSlider = () => {
           </div>
       </div>
 
-      <div
-        onClick={prevImage}
+      <div onClick={leftButton}
         className="absolute top-2/5 left-6 flex justify-center gap-4 mt-4 bg-blue-300 h-10 w-10 rounded-full items-center text-white cursor-pointer"
       >
         <FaChevronLeft />
       </div>
 
       <div
-        onClick={nextImage}
+      onClick={rightButton}
         className="absolute top-2/5 right-6 flex justify-center gap-4 mt-4 bg-blue-300 h-10 w-10 rounded-full items-center text-white cursor-pointer"
       >
         <FaChevronRight />
       </div>
 
-      <div className=" max-w-5xl hidden md:block w-full mx-auto bg-white text-black absolute bottom-[-25px] left-[17%] rounded-2xl opacity-85 ">
+      <div className=" max-w-5xl hidden lg:block w-full mx-auto bg-white text-black absolute bottom-[-1%] left-[16.5%] rounded-t-sm opacity-85 ">
         <div className="flex justify-between">
           <div className="flex flex-col items-center justify-center gap-2 p-8">
             <p className="font-bold">Free Delivery </p>

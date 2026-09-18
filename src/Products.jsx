@@ -39,7 +39,7 @@ export const Products = (props) => {
   return (
     <div className="flex flex-col justify-between group rounded overflow-hidden  hover:shadow-green-200 hover:shadow-lg cursor-pointer bg-white text-black shadow-md">
       <Link to={`/products/${data.id}`}>
-        <div className="  ">
+        <div >
           <img
           className=" group-hover:scale-105 transition-transform duration-300   cursor-pointer"
           src={data.images[0]}

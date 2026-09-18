@@ -39,24 +39,24 @@ export const CartCard = ({ product }:{product:CartModel}) => {
   //update the local storage
 
   return (
-    <div className="grid grid-cols-6 gap-4 pb-4 mb-4  border-b-2 border-gray-200">
+    <div className="grid md:grid-cols-6 gap-4 pb-4 mb-4  border-b-2 border-gray-200">
       <div className="col-span-3 ">
-        <div className="flex gap-4">
+        <div className="flex  items-center flex-col md:flex-row gap-4">
           <img src={ Array.isArray(product.images) && product.images.length > 0 ?
              product.images[0] : '' } alt={product.title} className="w-40 h-40 object-cover rounded-md" />
 
-          <div className="flex flex-col justify-start items-start">
+          <div className="flex flex-col text-sm md:text-lg justify-start items-start">
             <strong>{product.title}</strong>
-            <p className="text-start">{product.description}</p>
+            <p className="text-start ">{product.description}</p>
           </div>
         </div>
       </div>
 
-      <div className="flex  items-center">$ {product.price}</div>
+    <div className=" flex  items-center">$ {product.price}</div>
       <div className="flex gap-2 justify-center text-start items-center">
         <button
           onClick={decreaseQuantity}
-          className="p-2 justify-center flex items-center  border-1 h-10 w-10 rounded-md bg-slate-100"
+          className="p-1 justify-center flex items-center  border-1 h-10 w-10 rounded-md bg-slate-100"
         >
           -
         </button>

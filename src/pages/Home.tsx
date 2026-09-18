@@ -11,7 +11,7 @@ export const Home = () => {
       <div className="" >
      
           <HomeSlider /> 
-      <div className="max-w-5xl w-full mx-auto bg-white  bottom-[-25px] left-[17%] rounded-2xl ">
+      <div className="max-w-5xl w-full mx-auto bg-white mt-0   rounded-sm ">
 
         <ProductSlider/>
         <ProductSlider cat={"smartphones"}/>

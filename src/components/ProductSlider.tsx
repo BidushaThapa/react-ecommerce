@@ -15,7 +15,7 @@ export const ProductSlider = ({ cat = "fragrances" }) => {
 
   return (
     <div className="">
-      <div className="flex justify-between items-center my-4 px-4 py-4 ">
+      <div className="flex rounded-xl justify-between items-center  px-4 py-4 ">
 
           
         <p className="text-3xl font-bold text-black text-center "> Top {capitalize(cat)}</p>

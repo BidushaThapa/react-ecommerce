@@ -14,7 +14,15 @@ import { Login } from "../pages/Login";
 import { AuthLayout } from "../Layouts/AuthLayout";
 import CategoryProducts from "../pages/CategoryProducts";
 import ShopLayout from "@/components/ShopLayout";
-import { About } from "@/pages/About";
+import React, { ComponentType, Suspense } from 'react';
+import { AdminRoute } from "@/components/Admin/AdminRoute";
+import AdminDashboard from "@/pages/AdminDashboard";
+const About=React.lazy(()=>import("../pages/About")) 
+const withSuspense= (Component:ComponentType)=>(
+  <Suspense>
+    <Component/>
+  </Suspense>
+)
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +35,7 @@ export const router = createBrowserRouter([
         element: <ShopLayout />,
         children: [
           { index: true, element: <ProductListing /> },
-          { path: "category/:cat", element: <CategoryProducts /> },
+          { path: "category/:cat", element: withSuspense(CategoryProducts)  },
          
         ],
       },
@@ -35,12 +43,14 @@ export const router = createBrowserRouter([
 
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
-      { path: "services", element: <Services /> },
+      { path: "services", element: withSuspense(Services) },
       { path: "test", element: <TestPage /> },
-      { path: "buynow", element: <BuyNow /> },
-      { path: "myblog", element: <Blog /> },
+      { path: "buynow", element: withSuspense(BuyNow) },
+      { path: "myblog", element: withSuspense(Blog) },
       { path: "homework", element: <Homework /> },
-      { path: "about", element: <About /> },
+      { path: "homework", element: <Homework /> },
+       { path: "about", element: withSuspense(About)
+       },
     ],
   },
   {
@@ -48,5 +58,13 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [{ path: "mycart", element: <MyCart /> }],
   },
+  {
+    path:"admin",
+  element:
+ ( <AdminRoute>
+    <AdminDashboard />
+  </AdminRoute>)
+ }
+
 ]);
 

@@ -23,7 +23,7 @@ const CategoryProducts = () => {
       {/* <div className="hidden md:block bg-white col-span-1 p-4">
       </div> */}
       <div className="col-span-5 bg-white text-black">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 grid-cols-1 bg-black p-8">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 grid-cols-2 bg-black p-8">
           
          
           {data?.map((product: ProductModel) => (

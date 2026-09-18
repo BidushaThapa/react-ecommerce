@@ -2,7 +2,7 @@
 import { create } from "zustand";
 interface UserStoreModel {
   sessionId:string|null,
-  currentUser:string|null,
+  currentUser:null,
   setSessionId:(token:string)=>void,
   logout:()=>void
 }

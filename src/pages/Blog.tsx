@@ -1,4 +1,4 @@
-// import image from "../../../src/assets/images.jpg";
+import image from "src/assets/Headphone.jpg"
 import { useGetTodos } from "../Apihooks/useGetTodos";
 
 type TodoModel={
@@ -13,7 +13,7 @@ const BlogCard = ({ reverse, todo }:BlogCardProps) => {
   return (
     <div className="flex gap-4 text-black bg-white mx-auto max-w-5xl">
        <div className={`w-1/3 p-2 ${reverse ?  "order-2" : "order-1" } `}>
-        <img src="" alt="#" className="w-full h-auto" />
+        <img src="image" alt="#" className="w-full h-auto" />
       </div>
 
       <div className={`w-2/3 flex flex-col gap-2 ${reverse ? "order-1" : "order-2"}`}>

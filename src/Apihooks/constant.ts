@@ -36,4 +36,10 @@ export const users =[
         token:'kajsdf78njoshdf;5+551654affe;dfasdsdfsdfsdfsdfsefwefwf23fe'
 
 },
+{
+  name:"Admin",
+  email:"admin@gmail.com",
+  password:"Bidusha@1234",
+    token:"admin-token-123"
+}
 ]

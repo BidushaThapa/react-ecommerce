@@ -2,6 +2,7 @@ import camera from "../assets/camera.jpg";
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { ProductModel } from '../types/Products/productModel';
+import { BlurImage } from "./ImgShimmer";
 
 type Props = {
   data: ProductModel;
@@ -16,7 +17,7 @@ export const Product = ({ data }: Props) => {
 
   const addToCart = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-
+d
     const cartItems = localStorage.getItem("cart");
     const cartData = cartItems ? JSON.parse(cartItems) : [];
     const index = cartData.findIndex((item: any) => item.id === data.id);
@@ -30,15 +31,20 @@ export const Product = ({ data }: Props) => {
   return (
     <div
       onClick={onCardClick}
-      className="flex flex-col justify-between w-full group rounded-2xl bg-white overflow-hidden shadow-md hover:shadow-lg hover:shadow-green-200 cursor-pointer"
+      className="flex flex-col justify-between h-full w-full group rounded-2xl bg-white overflow-hidden shadow-md hover:shadow-lg hover:shadow-green-200 cursor-pointer"
     >
-      <div className="min-h-48">
-        <img
-          className=" transform transition-all duration-300 group-hover:scale-105"
-          src={data.images?.[0] ?? camera}
-        />
+      <div className="min-h-30 md:min-h-48">
+       <div className="min-h-30 md:min-h-48">
+  <BlurImage
+    src={data.images?.[0] ?? camera}
+    placeholder={camera}
+    className="transform transition-all duration-300 group-hover:scale-105"
+    alt={data.title}
+  />
+</div>
+
       </div>
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-2 flex flex-col gap-2">
         <p className="font-bold text-black text-sm md:text-xl">{data.title}</p>
         <p className="hidden md:text-sm  text-slate-400 truncate">{data.description}</p>
 
@@ -46,7 +52,7 @@ export const Product = ({ data }: Props) => {
           <p className="text-lg font-semibold group-hover:text-green-500">
             ${data.price}
           </p>
-          <span className="flex items-center text-black">
+          <span className=" hidden md:flex  items-center text-black">
             <FaStar className="text-amber-300" />
             {data.rating}/5
           </span>

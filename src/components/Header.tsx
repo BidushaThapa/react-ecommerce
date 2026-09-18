@@ -11,15 +11,15 @@ export const Header = () => {
   const loginButton = () => navigate("login");
 
   return (
-      <div className="flex   flex-col gap-6 p-4 border rounded-xl md:flex-row md:justify-between md:items-center">
+      <div className="flex   flex-row  gap-6 p-4 border rounded-sm bg-black md:flex-row md:justify-between md:items-center">
 
       <div>
         <Link to="/products">
-          <img alt="logo" src={logo} className="h-10 w-auto" />
+          <img alt="logo" src={logo} className="h-5 md:h-10 w-auto" />
         </Link>
       </div>
 
-      <div className=" hidden md:flex justify-center gap-8 text-white font-medium text-medium">
+      <div className=" hidden md:flex justify-center  gap-8 text-white font-medium text-medium">
         <Link className="hover:text-amber-400 hover:underline" to="/">
           Home
         </Link>
@@ -40,13 +40,13 @@ export const Header = () => {
         </Link>
       </div>
 
-      <div>
+      <div className="">
         {sessionId? (
-          <div className="flex items-center gap-3 text-white">
+          <div className="flex items-center  gap-3 text-white">
             <p className="text-amber-500">Hi,{getUser()?.name }!</p>
             <button
               onClick={logout}
-              className="border-2 border-white rounded-xl px-4 py-1 hover:bg-amber-500"
+              className=" hidden md:block border-2 border-white rounded-xl px-4 py-1 hover:bg-amber-500"
             >
               Logout
             </button>
@@ -54,7 +54,7 @@ export const Header = () => {
         ) : (
           <button
             onClick={loginButton}
-            className="border-2 text-white border-white rounded-xl px-4 py-1 hover:bg-amber-500"
+           className="hidden md:block border-2 text-white border-white rounded-xl px-4 py-1 hover:bg-amber-500"
           >
             Login
           </button>

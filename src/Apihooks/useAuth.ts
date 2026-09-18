@@ -9,11 +9,16 @@ export const useAuth = () => {
   
 
   const getUser= () => users.find((user)=>user.token===sessionId)
+  const isAdmin=()=>{
+    const user=getUser()
+   return user?.email==="admin@gmail.com"
+  }
   return {
     logout,
     isAuthenticated,
     getUser,
     sessionId,
     currentUser,
+    isAdmin
   };
 };
