@@ -1,20 +1,29 @@
 //MyCart
-import {
-  FaArrowRight,
-  FaShoppingBag,
-  FaShoppingCart,
-} from "react-icons/fa"; 
+import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { CartCard } from "../components/cart/CartCard";
+import { CheckoutButton } from "../components/CheckoutButton";
 import { CartProduct } from "../types/Cart/cartModel";
 
 export const MyCart = () => {
   const cartItems = localStorage.getItem("cart");
   const token = localStorage.getItem("sessionId");
 
-  const cartList: Record<string, CartProduct[]> = cartItems ? JSON.parse(cartItems) : {};
+  const cartList: Record<string, CartProduct[]> = cartItems
+    ? JSON.parse(cartItems)
+    : {};
 
   const cartListForUser: CartProduct[] = token ? cartList[token] || [] : [];
-
+  const cartSubtotal = cartListForUser.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0,
+  );
+  const cartTotal = cartListForUser.reduce(
+    (total, product) =>
+      total +
+      product.price * (1 - product.discountPercentage / 100) * product.quantity,
+    0,
+  );
+  const totalDiscount = cartSubtotal - cartTotal;
 
   return (
     <div className="flex flex-col gap-5 md:gap-10 min-h-screen bg-white text-black p-2 md:p-6">
@@ -24,20 +33,20 @@ export const MyCart = () => {
           <FaShoppingBag /> My Cart
         </h1>
         <p>
-          <span className="font-semibold">{cartListForUser.length} items</span> in your cart
+          <span className="font-semibold">{cartListForUser.length} items</span>{" "}
+          in your cart
         </p>
       </div>
 
-    <div className="flex flex-col lg:grid lg:grid-cols-4">
+      <div className="flex flex-col lg:grid lg:grid-cols-4">
         {/* Body left  */}
-           <div className=" col-span-3 p-2 md:p-10 shadow-lg rounded-4xl ">
-        <div className="  hidden md:grid  text-xl grid-cols-6 gap-6 pb-4 mb-4 font-semibold ">
-          <p className="col-span-3 ">Product</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Total Price</p>
-        </div>
-
+        <div className=" col-span-3 p-2 md:p-10 shadow-lg rounded-4xl ">
+          <div className="  hidden md:grid  text-xl grid-cols-6 gap-6 pb-4 mb-4 font-semibold ">
+            <p className="col-span-3 ">Product</p>
+            <p>Price</p>
+            <p>Quantity</p>
+            <p>Total Price</p>
+          </div>
 
           {cartListForUser.length === 0 ? (
             <div className="flex flex-col gap-10 min-h-screen bg-white text-black p-6">
@@ -51,7 +60,7 @@ export const MyCart = () => {
               </p>
             </div>
           ) : (
-            cartListForUser.map((product:CartProduct) => (
+            cartListForUser.map((product: CartProduct) => (
               <CartCard key={product.id} product={product} />
             ))
           )}
@@ -98,27 +107,30 @@ export const MyCart = () => {
 
             <div className="flex justify-between">
               <p>Cart Subtotal</p>
-              {/* Placeholder for subtotal */}
+              <p>NPR {cartSubtotal.toFixed(2)}</p>
             </div>
 
             <div className="flex justify-between">
               <p>Total Discount</p>
-              {/* Placeholder for discount */}
+              <p>NPR {totalDiscount.toFixed(2)}</p>
             </div>
 
             <div className="flex justify-between font-bold">
               <p>Cart Total</p>
-              {/* Placeholder for total */}
+              <p>NPR {cartTotal.toFixed(2)}</p>
             </div>
 
             <hr className="my-4" />
 
-            <button className="flex bg-amber-500 justify-center items-center gap-2 text-white px-4 py-2 rounded-md shadow hover:bg-amber-600 cursor-pointer">
-              Go to Checkout <FaArrowRight />
-            </button>
+            <CheckoutButton
+              totalAmount={cartTotal}
+              purchaseOrderId={`cart-${token || "guest"}`}
+              purchaseOrderName="Ohho Cart Order"
+              label="Go to Checkout"
+            />
           </div>
         </div>
-    </div>
       </div>
+    </div>
   );
 };
