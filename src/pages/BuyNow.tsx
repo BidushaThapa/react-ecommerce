@@ -2,6 +2,7 @@
 import { FaMinus, FaPlus, FaShoppingBag } from "react-icons/fa";
 import { CheckoutButton } from "../components/CheckoutButton";
 import { useProduct } from "../store/productStore";
+import { formatNpr, usdToNpr } from "../lib/currency";
 
 export const BuyNow = () => {
   const buyNowProduct = useProduct((state) => state.buyNowProduct);
@@ -61,7 +62,7 @@ export const BuyNow = () => {
             </div>
 
             {/* Price */}
-            <p>NPR {buyNowProduct.price}</p>
+            <p>{formatNpr(buyNowProduct.price)}</p>
 
             {/* Quantity */}
             <div className="flex gap-2 items-center">
@@ -76,11 +77,12 @@ export const BuyNow = () => {
 
             {/* Total */}
             <p>
-              NPR
-              {Subtotal(
-                buyNowProduct.price,
-                buyNowProduct.discountPercentage,
-              ).toFixed(2)}
+              {formatNpr(
+                Subtotal(
+                  buyNowProduct.price,
+                  buyNowProduct.discountPercentage,
+                ),
+              )}
             </p>
           </div>
         </div>
@@ -91,7 +93,7 @@ export const BuyNow = () => {
 
           <div className="flex justify-between">
             <p>Cart Subtotal</p>
-            <p>NPR {buyNowProduct.price}</p>
+            <p>{formatNpr(buyNowProduct.price)}</p>
           </div>
 
           <div className="flex justify-between">
@@ -102,18 +104,19 @@ export const BuyNow = () => {
           <div className="flex justify-between font-bold">
             <p>Cart Total</p>
             <p>
-              NPR{" "}
-              {Subtotal(
-                buyNowProduct.price,
-                buyNowProduct.discountPercentage,
-              ).toFixed(2)}
+              {formatNpr(
+                Subtotal(
+                  buyNowProduct.price,
+                  buyNowProduct.discountPercentage,
+                ),
+              )}
             </p>
           </div>
 
           <hr className="my-4" />
 
           <CheckoutButton
-            totalAmount={totalAmount}
+            totalAmount={usdToNpr(totalAmount)}
             purchaseOrderId={`product-${buyNowProduct.id}`}
             purchaseOrderName={buyNowProduct.title}
             label="Buy Now"

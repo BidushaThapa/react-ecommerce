@@ -9,22 +9,40 @@ const app = express();
 const port = Number(process.env.PORT) || 5000;
 const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 const khaltiBaseUrl = "https://a.khalti.com/api/v2/";
-const secretKey = process.env.KHALTI_SECRET_KEY;
 const defaultCustomerInfo = {
   name: "Ohho Customer",
   email: "customer@example.com",
   phone: "9800000000",
 };
 
-app.use(cors({ origin: frontendUrl }));
+let users = [];
+
+try {
+  users = require("./users.json");
+} catch {
+  console.warn("users.json missing — auth disabled. (File is git-ignored; keep it on your server.)");
+}
+
+function publicUser(user) {
+  return { token: user.token, name: user.name, email: user.email, role: user.role };
+}
+
+app.use(
+  cors({
+    origin: frontendUrl,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 app.use(express.json());
 
 function getKhaltiHeaders() {
+  const cleanKey = process.env.KHALTI_SECRET_KEY
+    ?.replace(/^["']|["']$/g, "")
+    .replace(/^Key\s+/i, "");
   return {
-    Authorization:
-      secretKey && secretKey.startsWith("Key ")
-        ? secretKey
-        : `Key ${secretKey}`,
+    Authorization: `Key ${cleanKey}`,
     "Content-Type": "application/json",
   };
 }
@@ -89,11 +107,21 @@ app.post("/api/payment/khalti/initiate", async (request, response) => {
   }
 });
 
+const processedPidxStore = new Set();
+
 app.post("/api/payment/khalti/verify", async (request, response) => {
-  const { pidx } = request.body || {};
+  const {
+    pidx,
+    expected_amount: expectedAmount,
+    purchase_order_id: purchaseOrderId,
+  } = request.body || {};
 
   if (!pidx || typeof pidx !== "string") {
     return response.status(400).json({ error: "pidx is required" });
+  }
+
+  if (processedPidxStore.has(pidx)) {
+    return response.status(400).json({ error: "This payment has already been verified" });
   }
 
   try {
@@ -103,7 +131,34 @@ app.post("/api/payment/khalti/verify", async (request, response) => {
       { headers: getKhaltiHeaders() },
     );
 
-    return response.json(khaltiResponse.data);
+    const payment = khaltiResponse.data;
+    const status = payment.status;
+
+    if (status !== "Completed") {
+      return response.status(400).json({
+        success: false,
+        error: `Payment status: ${status || "Unknown"}`,
+      });
+    }
+
+    const numericExpected = Number(expectedAmount);
+    if (Number.isFinite(numericExpected) && numericExpected > 0) {
+      const expectedPaisa = Math.round(numericExpected * 100);
+      if (payment.total_amount !== expectedPaisa) {
+        return response
+          .status(400)
+          .json({ success: false, error: "Amount mismatch: verification failed" });
+      }
+    }
+
+    processedPidxStore.add(pidx);
+
+    return response.json({
+      success: true,
+      message: "Payment verified successfully",
+      purchase_order_id: purchaseOrderId,
+      data: payment,
+    });
   } catch (error) {
     return sendKhaltiError(response, error);
   }
@@ -117,6 +172,57 @@ app.use((error, request, response, next) => {
   }
 
   return next(error);
+});
+
+app.get("/api/health", (request, response) => {
+  return response.json({ status: "ok" });
+});
+
+app.post("/api/auth/login", (request, response) => {
+  const { email, password } = request.body || {};
+
+  if (!email || !password) {
+    return response.status(400).json({ error: "email and password are required" });
+  }
+
+  const user = users.find(
+    (candidate) => candidate.email === email && candidate.password === password,
+  );
+
+  if (!user) {
+    return response.status(401).json({ error: "Invalid email or password" });
+  }
+
+  return response.json(publicUser(user));
+});
+
+app.post("/api/auth/logout", (request, response) => {
+  return response.json({ success: true });
+});
+
+app.get("/api/auth/me", (request, response) => {
+  const header = request.headers.authorization || "";
+  const token = header.startsWith("Bearer ") ? header.slice(7) : "";
+
+  const user = users.find((candidate) => candidate.token === token);
+
+  if (!user) {
+    return response.status(401).json({ error: "Invalid or missing session token" });
+  }
+
+  return response.json(publicUser(user));
+});
+
+app.get("/", (request, response) => {
+  return response.redirect("/api/health");
+});
+
+app.use((request, response) => {
+  response.status(404).json({
+    error: "Not found",
+    path: request.path,
+    method: request.method,
+  });
 });
 
 app.listen(port, () => {

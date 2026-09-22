@@ -9,6 +9,7 @@ import { useProduct } from "../store/productStore";
 import { useAuth } from "../Apihooks/useAuth"; 
 import { ProductModel } from "../types/Products/productModel";
 import { CartData } from "../types/Cart/cartModel";
+import { formatNpr } from "../lib/currency";
 
 
 export const Details = () => {
@@ -117,10 +118,10 @@ export const Details = () => {
          
           <span className="bg-amber-500 text-white font-medium rounded-md px-3 py-1">
           
-            ${originalPrice({price:data.price, discountPercentage:data.discountPercentage} as ProductModel).toFixed(2)}
+            {formatNpr(originalPrice({price:data.price, discountPercentage:data.discountPercentage} as ProductModel))}
           </span>
            <p  className="line-through text-gray-500" >
-            ${data.price}
+            {formatNpr(data.price)}
           </p>
           <p className="bg-amber-100 text-amber-600 font-semibold rounded-md px-3 py-1">
             -{data.discountPercentage}%
@@ -246,10 +247,10 @@ export const Details = () => {
          
           <span className="bg-amber-500 text-white font-medium rounded-md px-3 py-1">
           
-            ${originalPrice({price:data.price, discountPercentage:data.discountPercentage} as ProductModel).toFixed(2)}
+            {formatNpr(originalPrice({price:data.price, discountPercentage:data.discountPercentage} as ProductModel))}
           </span>
            <p  className="line-through text-gray-500" >
-            ${data.price}
+            {formatNpr(data.price)}
           </p>
           <p className="bg-amber-100 text-amber-600 font-semibold rounded-md px-3 py-1">
             -{data.discountPercentage}%
