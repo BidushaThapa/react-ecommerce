@@ -25,7 +25,7 @@ export const BuyNow = () => {
   );
 
   return (
-    <div className="flex flex-col gap-10 min-h-screen bg-white text-black p-6">
+    <div className="flex min-h-screen flex-col gap-10 bg-[#f8f7f3] p-4 text-black md:p-8">
       {/* Title */}
       <div className="flex justify-center items-center">
         <h1 className="flex gap-2 text-3xl font-extrabold text-gray-900 border-b-4 border-amber-500 p-2">
@@ -34,9 +34,9 @@ export const BuyNow = () => {
       </div>
 
       {/* Body */}
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid gap-5 lg:grid-cols-4 lg:gap-8">
         {/* LEFT: Product Info */}
-        <div className="bg-gray-100 col-span-3 p-4 rounded-lg shadow-sm">
+        <div className="col-span-3 overflow-x-auto rounded-xl border border-[#dedbd2] bg-white p-4 shadow-sm">
           <div className="grid gap-2 grid-cols-4 border-b-2 p-2 font-semibold text-gray-700 mb-4">
             <p>Product</p>
             <p>Price</p>
@@ -86,7 +86,7 @@ export const BuyNow = () => {
         </div>
 
         {/* RIGHT: Summary */}
-        <div className="bg-white col-span-1 flex flex-col gap-3 p-6 rounded-lg shadow-md">
+        <div className="col-span-1 flex flex-col gap-3 rounded-xl border border-[#dedbd2] bg-white p-6 shadow-sm">
           <h1 className="text-xl font-semibold mb-4">Order Summary</h1>
 
           <div className="flex justify-between">

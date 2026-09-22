@@ -37,29 +37,32 @@ export const Products = (props) => {
   };
 
   return (
-    <div className="flex flex-col justify-between group rounded overflow-hidden  hover:shadow-green-200 hover:shadow-lg cursor-pointer bg-white text-black shadow-md">
+    <div className="group flex h-full cursor-pointer flex-col justify-between overflow-hidden rounded-xl border border-[#dedbd2] bg-white text-black shadow-sm hover:-translate-y-1 hover:shadow-xl">
       <Link to={`/products/${data.id}`}>
-        <div >
+        <div className="aspect-square overflow-hidden bg-[#f1efe9]">
           <img
-          className=" group-hover:scale-105 transition-transform duration-300   cursor-pointer"
-          src={data.images[0]}
-          alt={data.title}
-          
-        />
+            className="h-full w-full cursor-pointer object-cover transition-transform duration-300 group-hover:scale-105"
+            src={data.images[0]}
+            alt={data.title}
+          />
         </div>
       </Link>
 
-      <div className="p-2 flex flex-col gap-1">
+      <div className="flex flex-1 flex-col gap-2 p-4">
         <Link to={`/products/${data.id}`}>
-          <p className="font-bold text-sm md:text-xl hover:text-amber-500">{data.title}</p>
+          <p className="line-clamp-2 text-sm font-bold hover:text-amber-600 md:text-base">
+            {data.title}
+          </p>
         </Link>
-        <p className=" hidden md:text-sm text-slate-400 truncate">{data.description}</p>
+        <p className="line-clamp-2 text-xs text-slate-500">
+          {data.description}
+        </p>
 
         <div className="flex justify-between">
-          <p className="text-sm md:text-lg font-semibold group-hover:text-amber-500 transition-all">
+          <p className="text-lg font-bold group-hover:text-amber-600">
             ${data.price}
           </p>
-          <span className=" flex text-sm md:text-lg items-center">
+          <span className="flex items-center text-xs">
             <FaStar className="text-amber-300" />
             {data.rating}/5
           </span>
@@ -67,7 +70,7 @@ export const Products = (props) => {
 
         <button
           onClick={addToCart}
-          className=" text-sm md:text-xl w-full text-white bg-black rounded-2xl px-2  py-2 hover:bg-amber-500 transition-colors"
+          className="w-full rounded-lg bg-black px-2 py-2 text-sm font-semibold text-white transition-colors hover:bg-amber-500 hover:text-black"
         >
           Add to Cart
         </button>

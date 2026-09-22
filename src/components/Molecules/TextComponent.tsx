@@ -1,44 +1,54 @@
-import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import {
+  ButtonHTMLAttributes,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
 //for props
-interface Headingprops extends HTMLAttributes <HTMLParagraphElement>{ //interface bata yesari garna sakinxa 
-  children:ReactNode //ReactNode covers anything renderable (text, JSX, components, etc.)
+interface Headingprops extends HTMLAttributes<HTMLParagraphElement> {
+  //interface bata yesari garna sakinxa
+  children: ReactNode; //ReactNode covers anything renderable (text, JSX, components, etc.)
 }
 
-
-export const Heading =({children,...rest}:Headingprops)=>{
-    return (
-    <p className="font-bold text-white text-3xl"{...rest}>
-        {children}
-        </p>
-    );
-}
-interface Labelprops extends HTMLAttributes <HTMLLabelElement>{
-  children:ReactNode
-}
-export const Label =({children,...rest}:Labelprops)=>{
-    return (
-    <span className="text-lg font-[400]  hover:text-amber-500 hover:font-bold" {...rest}>  
-        {children}
-    </span>
-    );  
-}     
-type InputTextProps = InputHTMLAttributes <HTMLInputElement>&{ //type bata chai yesari garna sakinxa
-  className?:string
-}
-export const InputText = ({className,...rest}:InputTextProps) => {
+export const Heading = ({ children, ...rest }: Headingprops) => {
   return (
-   
-  <div>
-      <input  type="text"  className={`border-1 p-2 rounded-xl border-black text-black ${className}`}  {...rest}/>
-       
- 
-  </div>
+    <p className="text-lg font-bold text-[#181818]" {...rest}>
+      {children}
+    </p>
   );
+};
+interface Labelprops extends HTMLAttributes<HTMLLabelElement> {
+  children: ReactNode;
 }
-interface Buttonprops extends ButtonHTMLAttributes <HTMLButtonElement>{
-  children:ReactNode
+export const Label = ({ children, ...rest }: Labelprops) => {
+  return (
+    <span
+      className="text-sm font-medium text-[#4f4d47] hover:text-amber-600"
+      {...rest}
+    >
+      {children}
+    </span>
+  );
+};
+type InputTextProps = InputHTMLAttributes<HTMLInputElement> & {
+  //type bata chai yesari garna sakinxa
+  className?: string;
+};
+export const InputText = ({ className, ...rest }: InputTextProps) => {
+  return (
+    <div>
+      <input
+        type="text"
+        className={`w-full rounded-lg border border-[#dedbd2] bg-white p-2.5 text-sm text-black placeholder:text-[#8b8982] focus:border-amber-500 ${className}`}
+        {...rest}
+      />
+    </div>
+  );
+};
+interface Buttonprops extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
 }
-export const Button = ({ children, ...rest }:Buttonprops) => {
+export const Button = ({ children, ...rest }: Buttonprops) => {
   return (
     <button
       {...rest}
@@ -48,4 +58,3 @@ export const Button = ({ children, ...rest }:Buttonprops) => {
     </button>
   );
 };
-

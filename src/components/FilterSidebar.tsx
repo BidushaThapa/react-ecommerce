@@ -7,12 +7,18 @@ import { Searchbar } from "./Searchbar";
 
 export const FilterSidebar = () => {
   return (
-    <div className="flex flex-col pl-12 gap-3 overflow-y-scroll no-scrollbar ">
-      <Searchbar/>
-      <SidebarCategory  />
-      <Size  />
+    <div className="flex h-full flex-col gap-6 overflow-y-auto px-5 py-6 no-scrollbar">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-600">
+          Refine selection
+        </p>
+        <h2 className="mt-1 text-2xl font-bold text-[#181818]">Shop filters</h2>
+      </div>
+      <Searchbar />
+      <SidebarCategory />
+      <Size />
       <SidebarColors />
-      <Stockcount/>
+      <Stockcount />
       <Rating />
     </div>
   );
