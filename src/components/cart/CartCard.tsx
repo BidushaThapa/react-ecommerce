@@ -3,6 +3,7 @@
 import React from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { CartProduct } from "../../types/Cart/cartModel";
+import { formatNpr } from "../../lib/currency";
 
 export const CartCard = ({ product }:{product:CartProduct}) => {
   const [quantity, setQuantity] = React.useState(product.quantity || 1);
@@ -52,7 +53,7 @@ export const CartCard = ({ product }:{product:CartProduct}) => {
         </div>
       </div>
 
-    <div className=" flex  items-center">$ {product.price}</div>
+    <div className=" flex  items-center">{formatNpr(product.price)}</div>
       <div className="flex gap-2 justify-center text-start items-center">
         <button
           onClick={decreaseQuantity}
@@ -78,7 +79,7 @@ export const CartCard = ({ product }:{product:CartProduct}) => {
           <FaTrashCan/>
         </button>
       </div>
-      <div className="flex  items-center">${total.toFixed(2)}</div>
+      <div className="flex  items-center">{formatNpr(total)}</div>
     </div>
   );
 };

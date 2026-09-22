@@ -1,5 +1,8 @@
 import { Button, Heading } from "../components/Molecules/TextComponent";
-import { loginLocally, userSchema } from "../components/services/LoginService";
+import {
+  loginViaBackend,
+  userSchema,
+} from "../components/services/LoginService";
 import { useNavigate } from "react-router-dom";
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import { UserStore } from "../store/UserStore";
@@ -9,22 +12,23 @@ import { LoginModel } from "../types/loginModel";
 export const Login = () => {
   // const isLogin = useLoginStore((state) => state.isLogin);
   const setSessionId = UserStore((state) => state.setSessionId);
+  const setCurrentUser = UserStore((state) => state.setCurrentUser);
   const navigate = useNavigate();
 
-  const handleLogin = (values: LoginModel) => {
-    const user = loginLocally(values);
-    if (user) {
+  const handleLogin = async (values: LoginModel) => {
+    try {
+      const user = await loginViaBackend(values);
       setSessionId(user.token);
+      setCurrentUser({ name: user.name, email: user.email, role: user.role });
       alert(`Hi ${user.name} !!`);
-     
-    }
-    if (user?.email==="admin@gmail.com"){
-      navigate("/admin")
-    }
-    else
-       {
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
         navigate("/");
       }
+    } catch (error) {
+      alert(error instanceof Error ? error.message : "Login failed");
+    }
   };
 
   return (

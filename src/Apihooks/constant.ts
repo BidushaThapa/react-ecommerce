@@ -4,6 +4,8 @@ import { ProductQuery } from "./useGetProduct";
 
 export const BASEURL = "https://dummyjson.com";
 
+export const BACKEND_URL = "http://localhost:5000";
+
 export const URL = {
   getProducts: (updatedPage: ProductQuery)  => {
     let page = updatedPage.page;

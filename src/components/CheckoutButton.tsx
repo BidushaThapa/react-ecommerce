@@ -47,10 +47,17 @@ export const CheckoutButton = ({
         throw new Error(data.error || "Unable to start Khalti payment.");
       }
 
+      sessionStorage.setItem(`order_amount_${purchaseOrderId}`, String(totalAmount));
       window.location.href = data.payment_url;
     } catch (error) {
+      const networkUnreachable = error instanceof TypeError;
+
       setErrorMessage(
-        error instanceof Error ? error.message : "Unable to start payment.",
+        networkUnreachable
+          ? "Cannot reach payment server at http://localhost:5000 — is the backend running?"
+          : error instanceof Error
+            ? error.message
+            : "Unable to start payment.",
       );
       setIsLoading(false);
     }

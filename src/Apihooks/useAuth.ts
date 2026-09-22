@@ -1,17 +1,15 @@
 import { UserStore } from "../store/UserStore";
-import { users } from "./constant";
 
 export const useAuth = () => {
   const logout = UserStore((state) => state.logout);
    const sessionId = UserStore((state)=> state.sessionId)
    const currentUser =UserStore ((state)=>state.currentUser)
   const  isAuthenticated= () =>  Boolean(sessionId);
-  
 
-  const getUser= () => users.find((user)=>user.token===sessionId)
+  const getUser = () => currentUser;
+
   const isAdmin=()=>{
-    const user=getUser()
-   return user?.email==="admin@gmail.com"
+    return currentUser?.role === "admin" || currentUser?.email === "admin@gmail.com";
   }
   return {
     logout,
