@@ -34,16 +34,19 @@ export const SidebarColors = () => {
   return (
     <div>
       <Heading>Colours</Heading>
-      <div className="mt-3 grid grid-cols-6 gap-2">
+      <div className="mt-4 grid grid-cols-5 gap-3">
         {colors.map((color, i) => {
           const isSelected = color === filters.color;
           return (
             <button
               key={i}
               onClick={() => setFilters("color", color)}
-              className={`w-8 h-8 rounded-full ${color} border-2 cursor-pointer
-              ${isSelected ? "border-black" : "border-gray-300"} 
-              transition-transform duration-200`}
+              className={`h-9 w-9 rounded-full ${color} cursor-pointer border transition-all
+                ${
+                  isSelected
+                    ? "border-transparent ring-2 ring-amber-500 ring-offset-2"
+                    : "border-[#dedbd2] hover:border-amber-500"
+                }`}
               aria-label={`Select ${color.replace("bg-", "").replace("-500", "")} color`}
             ></button>
           );
