@@ -1,35 +1,32 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {Product} from "../components/Product"
+import { Product } from "../components/Product";
 import { useGetCategories } from "../Apihooks/useGetCategories";
 import { ProductModel } from "../types/Products/productModel";
 const CategoryProducts = () => {
-      const [page,setPage]=useState(1)
-      const { cat } = useParams();
-      const {data , isLoading:loading}=   useGetCategories(cat);
+  const [page, setPage] = useState(1);
+  const { cat } = useParams();
+  const { data, isLoading: loading } = useGetCategories(cat);
 
-      //const productList =data.products
-   useEffect(() => {
+  //const productList =data.products
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-   if (loading)
+  if (loading)
     return (
-      <div className="w-full h-full flex justify-center items-center">
-        Loading...
+      <div className="flex min-h-[50vh] w-full items-center justify-center text-sm text-slate-500">
+        Loading products...
       </div>
     );
   return (
-    <div className="grid grid-cols-4 md:grid-cols-5 h-[92%]">
+    <div className="min-h-screen w-full">
       {/* <div className="hidden md:block bg-white col-span-1 p-4">
       </div> */}
-      <div className="col-span-5 bg-white text-black">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 grid-cols-2 bg-black p-8">
-          
-         
+      <div className="text-black">
+        <div className="grid grid-cols-2 gap-3 p-4 sm:gap-5 sm:p-6 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {data?.map((product: ProductModel) => (
             <Product key={product.id} data={product} />
           ))}
-      
         </div>
         {/* <div className="flex justify-center items-center gap-4 my-4">
           <button onClick={() => setPage(1)}>1</button>
@@ -43,5 +40,4 @@ const CategoryProducts = () => {
   );
 };
 
-
-export default CategoryProducts
+export default CategoryProducts;

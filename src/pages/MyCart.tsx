@@ -27,9 +27,9 @@ export const MyCart = () => {
   const totalDiscount = cartSubtotal - cartTotal;
 
   return (
-    <div className="flex flex-col gap-5 md:gap-10 min-h-screen bg-white text-black p-2 md:p-6">
+    <div className="flex min-h-screen flex-col gap-5 bg-[#f8f7f3] p-4 text-black md:gap-10 md:p-8">
       {/* Title */}
-      <div className="flex  justify-between items-center">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="flex gap-2 text-xl md:text-3xl font-extrabold text-gray-900 border-b-4 border-amber-500 p-2">
           <FaShoppingBag /> My Cart
         </h1>
@@ -39,9 +39,9 @@ export const MyCart = () => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:grid lg:grid-cols-4">
+      <div className="flex flex-col gap-5 lg:grid lg:grid-cols-4">
         {/* Body left  */}
-        <div className=" col-span-3 p-2 md:p-10 shadow-lg rounded-4xl ">
+        <div className="col-span-3 rounded-xl border border-[#dedbd2] bg-white p-3 shadow-sm md:p-8">
           <div className="  hidden md:grid  text-xl grid-cols-6 gap-6 pb-4 mb-4 font-semibold ">
             <p className="col-span-3 ">Product</p>
             <p>Price</p>
@@ -68,12 +68,12 @@ export const MyCart = () => {
         </div>
 
         {/* RIGHT: Shipping Summary */}
-        <div className="bg-white col-span-1 flex flex-col gap-3 p-6 rounded-lg shadow-md">
+        <div className="col-span-1 flex flex-col gap-3 rounded-xl border border-[#dedbd2] bg-white p-6 shadow-sm">
           <h1 className="text-xl font-semibold mb-4">Calculated Shipping</h1>
 
           {/* Country Selection */}
           <div>
-            <select className="border-2 rounded-xl px-8 py-2 w-full">
+            <select className="w-full rounded-lg border border-[#dedbd2] px-4 py-2">
               <option className="text-gray-300">Country</option>
               <option value="">Nepal</option>
               <option value="">USA</option>
@@ -84,7 +84,7 @@ export const MyCart = () => {
 
           {/* City Selection */}
           <div>
-            <select className="border-2 rounded-xl px-8 py-2 w-full">
+            <select className="w-full rounded-lg border border-[#dedbd2] px-4 py-2">
               <option className="text-gray-300">City/State</option>
               <option value="">Kathmandu</option>
               <option value="">Birjung</option>

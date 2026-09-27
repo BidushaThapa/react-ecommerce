@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Bidusha",
+    "email": "xyza@gmail.com",
+    "password": "Secure!Pass123",
+    "token": "adjfklj4lw;34rj9difnfoai03fp30fodsnojf3",
+    "role": "user"
+  },
+  {
+    "name": "Bidusha",
+    "email": "xyzb@gmail.com",
+    "password": "12345@Ab",
+    "token": "kajsdf78njoshdf;5+551654affe;34rj9difnfoai03fp30fodsnojf3",
+    "role": "user"
+  },
+  {
+    "name": "Rashant",
+    "email": "xyzc@gmail.com",
+    "password": "12345",
+    "token": "kajsdf78njoshdf;5+551654affe;dfasdsdfsdfsdfsdfsefwefwf23fe",
+    "role": "user"
+  },
+  {
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "Bidusha@1234",
+    "token": "admin-token-123",
+    "role": "admin"
+  }
+]

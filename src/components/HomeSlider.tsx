@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import Slider1 from "../assets/Slider1.webp";
 import Slider2 from "../assets/Slider2.webp";
 import Slider3 from "../assets/Slider3.webp";
 import Slider4 from "../assets/Slider4.webp";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const details = [
   { image: Slider1, content: "Free Delivery All over Nepal! " },
@@ -14,16 +14,16 @@ const details = [
 
 export const HomeSlider = () => {
   const [imageIndex, setImageIndex] = useState(0);
-  const scroll = useRef<HTMLDivElement>(null)
+  const scroll = useRef<HTMLDivElement>(null);
   const imageSrc = details[imageIndex].image;
   const content = details[imageIndex].content;
 
-  const rightButton = ()=>{
-    scroll.current?.scrollBy({left: 400})
-  }
-    const leftButton=()=>{
-    scroll.current?.scrollBy({left: -400})
-  }
+  const rightButton = () => {
+    scroll.current?.scrollBy({ left: 400 });
+  };
+  const leftButton = () => {
+    scroll.current?.scrollBy({ left: -400 });
+  };
   const prevImage = () => {
     const index = imageIndex === 0 ? details.length - 1 : imageIndex - 1;
     setImageIndex(index);
@@ -45,51 +45,43 @@ export const HomeSlider = () => {
   }, []);
 
   return (
-    <div className="relative">
-      <div ref={scroll} className=" w-full max-h-[calc(100vh-100px)] overflow-hidden">
-        <img src={imageSrc} className=' object-cover' />
-        
+    <div className="relative overflow-hidden">
+      <div
+        ref={scroll}
+        className="h-[360px] w-full overflow-hidden sm:h-[480px] lg:h-[560px]"
+      >
+        <img
+          src={imageSrc}
+          alt={content}
+          className="h-full w-full object-cover"
+        />
+
         <div className="absolute top-2/5 right-6   md:right-24 lg:right-48 hidden md:block">
-         <p className="text-sm md:text-4xl lg:text-6xl font-bold text-cyan-700 text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">
-              {content}
-            </p>
+          <p className="max-w-lg text-right text-2xl font-extrabold leading-tight tracking-tight text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)] md:text-4xl lg:text-6xl">
+            {content}
+          </p>
         </div>
-         <div className="absolute bottom-2.5 left-1/5  block md:hidden">
-            <p className="text-sm md:text-4xl lg:text-6xl font-bold text-cyan-700 text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;">
-              {content}
-            </p>
-          </div>
+        <div className="absolute bottom-2.5 left-1/5  block md:hidden">
+          <p className="max-w-[270px] text-xl font-extrabold leading-tight tracking-tight text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)]">
+            {content}
+          </p>
+        </div>
       </div>
 
-      <div onClick={leftButton}
-        className="absolute top-2/5 left-6 flex justify-center gap-4 mt-4 bg-blue-300 h-10 w-10 rounded-full items-center text-white cursor-pointer"
+      <div
+        onClick={leftButton}
+        className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/75 text-white hover:bg-amber-500 hover:text-black"
       >
         <FaChevronLeft />
       </div>
 
       <div
-      onClick={rightButton}
-        className="absolute top-2/5 right-6 flex justify-center gap-4 mt-4 bg-blue-300 h-10 w-10 rounded-full items-center text-white cursor-pointer"
+        onClick={rightButton}
+        className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/75 text-white hover:bg-amber-500 hover:text-black"
       >
         <FaChevronRight />
       </div>
 
-      <div className=" max-w-5xl hidden lg:block w-full mx-auto bg-white text-black absolute bottom-[-1%] left-[16.5%] rounded-t-sm opacity-85 ">
-        <div className="flex justify-between">
-          <div className="flex flex-col items-center justify-center gap-2 p-8">
-            <p className="font-bold">Free Delivery </p>
-            <p>Near Banepa </p>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-2 p-10">
-            <p className="font-bold">30 Days return </p>
-            <p>Near Banepa </p>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-2 p-10">
-            <p className="font-bold">Secure Payment</p>
-            <p>Near Banepa </p>
-          </div>
-        </div>
       </div>
-    </div>
   );
 };

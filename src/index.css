@@ -12,50 +12,50 @@
   }
 }
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: #181818;
+  background-color: #f8f7f3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --background: #f8f7f3;
+  --foreground: #181818;
+  --card: #ffffff;
+  --card-foreground: #181818;
+  --popover: #ffffff;
+  --popover-foreground: #181818;
+  --primary: #f59e0b;
+  --primary-foreground: #181818;
+  --secondary: #181818;
+  --secondary-foreground: #ffffff;
+  --muted: #eeece6;
+  --muted-foreground: #6b6a65;
+  --accent: #fff3d6;
+  --accent-foreground: #181818;
+  --destructive: #b42318;
+  --border: #dedbd2;
+  --input: #dedbd2;
+  --ring: #f59e0b;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #181818;
+  --sidebar-primary: #f59e0b;
+  --sidebar-primary-foreground: #181818;
+  --sidebar-accent: #fff3d6;
+  --sidebar-accent-foreground: #181818;
+  --sidebar-border: #dedbd2;
+  --sidebar-ring: #f59e0b;
 }
 
 @theme inline {
@@ -139,6 +139,26 @@
   }
   body {
     @apply bg-background text-foreground;
+    min-width: 320px;
+  }
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--primary) 55%, transparent);
+    outline-offset: 2px;
   }
 }
-

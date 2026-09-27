@@ -83,8 +83,8 @@ export const PaymentSuccess = () => {
   }, [searchParams]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white p-6 text-center text-black">
-      <section className="max-w-md rounded-lg p-8 shadow-md">
+    <main className="flex min-h-screen items-center justify-center bg-[#f8f7f3] p-6 text-center text-black">
+      <section className="w-full max-w-md rounded-xl border border-[#dedbd2] bg-white p-8 shadow-lg">
         <h1
           className={`text-2xl font-bold ${state === "success" ? "text-green-600" : state === "failure" ? "text-red-600" : "text-amber-600"}`}
         >
