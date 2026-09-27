@@ -6,6 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
 import { UserStore } from "../store/UserStore";
 import { useAuth } from "../Apihooks/useAuth";
+import { BACKEND_URL } from "../Apihooks/constant";
 export const Header = () => {
   const sessionId = UserStore((state) => state.sessionId);
   const { getUser, logout } = useAuth();
@@ -14,65 +15,23 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const loginButton = () => navigate("login");
 
-  if (/^\/products\/[^/]+$/.test(location.pathname)) {
-    return (
-      <div className="flex flex-row gap-6 rounded-sm border bg-black p-4 md:items-center md:justify-between">
-        <div>
-          <Link to="/products">
-            <img alt="logo" src={logo} className="h-5 w-auto md:h-10" />
-          </Link>
-        </div>
-        <div className="hidden justify-center gap-8 text-white md:flex md:font-medium">
-          <Link className="hover:text-amber-400 hover:underline" to="/">
-            Home
-          </Link>
-          <Link className="hover:text-amber-400 hover:underline" to="/about">
-            About Us
-          </Link>
-          <Link className="hover:text-amber-400 hover:underline" to="/contact">
-            Contact Us
-          </Link>
-          <Link className="hover:text-amber-400 hover:underline" to="/services">
-            Services
-          </Link>
-          <Link className="hover:text-amber-400 hover:underline" to="/myblog">
-            Blogs
-          </Link>
-          <Link className="hover:text-amber-400 hover:underline" to="/mycart">
-            <FaShoppingCart size={20} title="Go To Cart" />
-          </Link>
-        </div>
-        <div>
-          {sessionId ? (
-            <div className="flex items-center gap-3 text-white">
-              <p className="text-amber-500">Hi,{getUser()?.name}!</p>
-              <button
-                onClick={logout}
-                className="hidden rounded-xl border-2 border-white px-4 py-1 hover:bg-amber-500 md:block"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={loginButton}
-              className="hidden rounded-xl border-2 border-white px-4 py-1 text-white hover:bg-amber-500 md:block"
-            >
-              Login
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
-
   const links = [
     ["Home", "/"],
+    ["Products", "/products"],
     ["About Us", "/about"],
     ["Contact", "/contact"],
     ["Services", "/services"],
     ["Blogs", "/myblog"],
   ];
+
+  const handleLogout = async () => {
+    try {
+      await fetch(`${BACKEND_URL}/api/auth/logout`, { method: "POST" });
+    } catch {
+      // Backend optional; session is cleared locally regardless.
+    }
+    logout();
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-black px-4 py-3 text-white shadow-lg md:px-8">
@@ -148,7 +107,7 @@ export const Header = () => {
           </Link>
           {sessionId ? (
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="rounded-lg px-3 py-2 text-left hover:bg-amber-500 hover:text-black"
             >
               Logout

@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ProductModel } from "../types/Products/productModel";
 import { BlurImage } from "./ImgShimmer";
+import { formatNpr } from '../lib/currency';
 
 type Props = {
   data: ProductModel;
@@ -52,8 +53,8 @@ export const Product = ({ data }: Props) => {
         </p>
 
         <div className="flex justify-between">
-          <p className="text-lg font-bold group-hover:text-amber-600">
-            ${data.price}
+          <p className="text-lg font-semibold group-hover:text-green-500">
+            {formatNpr(data.price)}
           </p>
           <span className="flex items-center text-xs text-black">
             <FaStar className="text-amber-300" />

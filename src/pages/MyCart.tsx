@@ -3,6 +3,7 @@ import { FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { CartCard } from "../components/cart/CartCard";
 import { CheckoutButton } from "../components/CheckoutButton";
 import { CartProduct } from "../types/Cart/cartModel";
+import { formatNpr, usdToNpr } from "../lib/currency";
 
 export const MyCart = () => {
   const cartItems = localStorage.getItem("cart");
@@ -107,23 +108,23 @@ export const MyCart = () => {
 
             <div className="flex justify-between">
               <p>Cart Subtotal</p>
-              <p>NPR {cartSubtotal.toFixed(2)}</p>
+              <p>{formatNpr(cartSubtotal)}</p>
             </div>
 
             <div className="flex justify-between">
               <p>Total Discount</p>
-              <p>NPR {totalDiscount.toFixed(2)}</p>
+              <p>{formatNpr(totalDiscount)}</p>
             </div>
 
             <div className="flex justify-between font-bold">
               <p>Cart Total</p>
-              <p>NPR {cartTotal.toFixed(2)}</p>
+              <p>{formatNpr(cartTotal)}</p>
             </div>
 
             <hr className="my-4" />
 
             <CheckoutButton
-              totalAmount={cartTotal}
+              totalAmount={usdToNpr(cartTotal)}
               purchaseOrderId={`cart-${token || "guest"}`}
               purchaseOrderName="Ohho Cart Order"
               label="Go to Checkout"

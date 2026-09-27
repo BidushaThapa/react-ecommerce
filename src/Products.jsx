@@ -2,6 +2,7 @@
 import { FaStar } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./Apihooks/useAuth";
+import { formatNpr } from "./lib/currency";
 
 export const Products = (props) => {
   const { isAuthenticated } = useAuth();
@@ -59,8 +60,8 @@ export const Products = (props) => {
         </p>
 
         <div className="flex justify-between">
-          <p className="text-lg font-bold group-hover:text-amber-600">
-            ${data.price}
+          <p className="text-sm md:text-lg font-semibold group-hover:text-amber-500 transition-all">
+            {formatNpr(data.price)}
           </p>
           <span className="flex items-center text-xs">
             <FaStar className="text-amber-300" />
