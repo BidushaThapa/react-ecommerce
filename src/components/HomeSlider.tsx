@@ -57,12 +57,12 @@ export const HomeSlider = () => {
         />
 
         <div className="absolute top-2/5 right-6   md:right-24 lg:right-48 hidden md:block">
-          <p className="max-w-lg text-right text-2xl font-bold text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)] md:text-4xl lg:text-6xl">
+          <p className="max-w-lg text-right text-2xl font-extrabold leading-tight tracking-tight text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)] md:text-4xl lg:text-6xl">
             {content}
           </p>
         </div>
         <div className="absolute bottom-2.5 left-1/5  block md:hidden">
-          <p className="max-w-[270px] text-xl font-bold text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)]">
+          <p className="max-w-[270px] text-xl font-extrabold leading-tight tracking-tight text-black drop-shadow-[0_2px_0_rgba(255,255,255,0.8)]">
             {content}
           </p>
         </div>
@@ -82,22 +82,6 @@ export const HomeSlider = () => {
         <FaChevronRight />
       </div>
 
-      <div className="absolute bottom-0 left-1/2 hidden w-[min(90%,900px)] -translate-x-1/2 rounded-t-xl bg-white/95 text-black shadow-xl lg:block">
-        <div className="flex justify-between">
-          <div className="flex flex-col items-center justify-center gap-2 p-8">
-            <p className="font-bold">Free Delivery </p>
-            <p>Near Banepa </p>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-2 p-10">
-            <p className="font-bold">30 Days return </p>
-            <p>Near Banepa </p>
-          </div>
-          <div className="flex flex-col items-center justify-center gap-2 p-10">
-            <p className="font-bold">Secure Payment</p>
-            <p>Near Banepa </p>
-          </div>
-        </div>
       </div>
-    </div>
   );
 };
