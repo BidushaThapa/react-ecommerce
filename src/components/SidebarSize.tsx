@@ -9,7 +9,7 @@ export const Size = () => {
   return (
     <div>
       <Heading>Size</Heading>
-      <div className="flex gap-2 mt-2 flex-wrap">
+      <div className="mt-4 flex flex-wrap gap-3">
         {sizes.map((size, i) => {
           const isSelected = size === filters.size;
           return (
@@ -17,8 +17,11 @@ export const Size = () => {
               type="button"
               key={i}
               onClick={() => setFilters("size", size)}
-              className={`flex px-2 py-0.5 border rounded cursor-pointer 
-                ${isSelected ? "bg-amber-500 text-white font-bold" : "text-black "}`}
+              className={`flex rounded-lg border px-4 py-1.5 text-sm transition-colors cursor-pointer ${
+                isSelected
+                  ? "border-amber-500 bg-amber-500 font-semibold text-white"
+                  : "border-[#dedbd2] bg-white text-black hover:border-amber-500"
+              }`}
             >
               <Label>{size}</Label>
             </button>
