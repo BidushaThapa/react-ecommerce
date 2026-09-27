@@ -7,8 +7,12 @@ export const Stockcount = () => {
       <input
         type="range"
         aria-label="Minimum stock"
-        className="w-full accent-amber-500"
+        className="mt-4 w-full accent-amber-500"
       />
+      <div className="mt-2 flex justify-between text-xs text-[#8b8982]">
+        <span>Min</span>
+        <span>Max</span>
+      </div>
     </div>
   );
 };
