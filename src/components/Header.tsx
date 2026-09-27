@@ -62,7 +62,7 @@ export const Header = () => {
             <div className="flex items-center gap-3 text-white">
               <p className="text-amber-500">Hi,{getUser()?.name}!</p>
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="rounded-lg border border-amber-400 px-4 py-2 text-sm font-semibold hover:bg-amber-500 hover:text-black"
               >
                 Logout
